@@ -1,0 +1,43 @@
+digraph{
+//	bgcolor = ".1 .6 1.0";
+
+	//connections
+
+	var1 -> oper1;
+	var1 ->	oper2;
+	var2 -> var12 -> oper4 -> var124 -> oper7;
+	var3 -> oper2;
+	var4 -> oper2;
+	var5 -> oper2 -> var345 -> oper5;
+	var6 -> oper4;
+	var7 -> oper3 -> var73 -> oper5 -> var34573 -> oper6;
+	var8 -> oper6 -> var348 -> oper7 -> var3486 -> oper8 -> var_result;
+
+/*
+	var1 -> oper1;
+	var2 -> oper1;
+	var12 -> oper4;
+	var124 -> oper7;
+	var3 -> oper2;
+	var4 -> oper2;
+	var5 -> oper2; 
+	var345 -> oper5;
+	var6 -> oper4;
+	var7 -> oper3;
+	var73 -> oper5;
+	var34573 -> oper6;
+	var8 -> oper6;
+	var348 -> oper7;
+	var3486 -> oper8;
+
+	oper2 -> var345;
+	oper3 -> var73;
+	oper5 -> var34573;
+	oper6 -> var348;
+	oper4 -> var124;
+	oper7 -> var3486;
+	oper1 -> var12;
+	oper8 -> var_result;
+*/
+	}
+
