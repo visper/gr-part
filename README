@@ -1,0 +1,36 @@
+this repository include most of all my works with partition of graph
+
+
+
+inter - dir that save some parts for translator(interpreter) dot
+3_mass_1list.h - one of representation of graph in 3 arrays
+3_mass_list.h  - one of representation of graph in 3 arrays
+3_mass_te.h - one of representation of graph in 3 arrays
+3_mass_te_old_list.h  - one of representation of graph in 3 arrays
+common.h - some common information used in most files
+CSR.c - one of representation of graph in compress sparse row
+generator - object file of generator
+generator.c - file in that do tests with different structures
+gen_matrix.h - library that I can use to generate matrix n*n
+greedy_partition.h - one of the partition of graph
+greedy_partition_first.h - second edition of greedy_partition
+interpreter.sh - file that must interpreted generated dot files from .gv to .ps
+
+kernigan-lin.h - one of the graph partition
+list_cormen.h - representation of list that owerwrite in Corman, that based on 
+\right_list.h for save graph
+
+list_support.h - some support functions for list
+recursive_partition.h - one of the graph partitioning, but this representetion
+write wrong, but work :) and used for tests
+right_list.h - this the best of my representations of list
+right_list_three.h - this file used in 3 list representation
+right_list_two.h - this file used in 3 list representation
+RRCO_CSR - 
+RRCO_CSR.c - one of representation of graph
+timer.h - file have usefull funcions to do time tests
+tr_converter.h - have funcions to convert struct with graph to dot 
+representation
+tr_dot_translator.h - have enumeration elements of alphabet of dot language
+tr_generator_name.h - file have funtions for generated names, that used for
+translate structs that save graph in dot format
