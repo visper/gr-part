@@ -1,3 +1,5 @@
+//first realisation of greedy_partition
+//NOT WORKED
 
 int greedy_partition(const struct vertex_list* vlist)
 {

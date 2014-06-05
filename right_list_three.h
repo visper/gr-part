@@ -1,3 +1,5 @@
+//one of realization of 3 arrays
+
 /*
 #ifndef _cormen
 #define _cormen

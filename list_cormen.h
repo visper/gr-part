@@ -1,3 +1,5 @@
+//this file based on right_list.h
+
 //#include "right_list.h"
 
 #ifndef NUM_OF_NODES
@@ -7,6 +9,7 @@
 int create_list(struct vertex_list* vlist)
 {
 	size_t j = 0;
+	//malloc mem for NUM_OF_NODES * sizeof(list)
 	for(struct vertex_list* i = vlist; j < NUM_OF_NODES; 
 	    i = i + sizeof(struct vertex_list*)) {
 		vertex_list_ini(i);
@@ -25,7 +28,6 @@ void destroy_list(struct vertex_list* vlist)
 	}
 }
 
-//НАПИСАТЬ ГЕНЕРАТОР ДЛЯ ОТДЕЛЬНЫХ ВЕРШИН И ЧИСЕЛ
 int add(struct vertex_list* vlist, struct vertex* vertex, size_t num_of_node)
 {
 	int rc=vertex_list_add((vlist+num_of_node*sizeof(struct vertex_list*)), 

@@ -1,3 +1,5 @@
+//suport file for easy make test of time
+
 #include <stdio.h>
 #include <stdlib.h>
 //#include <stdbool.h>
@@ -17,7 +19,6 @@ size_t checkpoint(void)
 	rc = gettimeofday(&tv, NULL);
 	assert(rc == 0); /* XXX: provide more correct solution */
 
-	//what the FUCK????
 	return 1000000*tv.tv_sec + tv.tv_usec;
 }
 

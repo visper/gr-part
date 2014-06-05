@@ -1,3 +1,5 @@
+//this file not used in this project. this file do for study
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -153,11 +155,6 @@ struct node* mass_find1(struct mass1* vmass, struct data1* vdata)
 		struct node1* temp = vmass->str->head;
 		while (temp) {
 			if(temp->data == vdata) { // maybe error
-                                /*
-				assert(vdata->row == temp->data->row);
-				assert(vdata->column == temp->data->column);
-				assert(vdata->value == temp->data->value);
-                                */
 
 				return temp;
 			}
@@ -170,11 +167,6 @@ struct node* mass_find1(struct mass1* vmass, struct data1* vdata)
 	}
 	else if (rc == ONE) {
 		if(vmass->str->head->data == vdata) { // maybe error
-			/*
-			assert(vdata->row == vmass->str->head->data->row);
-			assert(vdata->column == vmass->str->head->data->column);
-			assert(vdata->value == vmass->str->head->data->value);
-			*/
 			return vmass->str->head;
 		}
 		else 

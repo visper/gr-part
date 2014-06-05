@@ -1,3 +1,5 @@
+//one of realization of 3 arrays
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>

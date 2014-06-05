@@ -1,3 +1,5 @@
+//this file use function from right_list_three.h for usefull work with 
+//struct. here I create functions for easy work with struct
 #include "right_list_three.h"
 
 struct three_mass3 {
@@ -40,7 +42,6 @@ int three_mass_add3(struct three_mass3* vmass, struct vertex3* vertex)
 		return EINVAL;
 	assert(rc == 0);
 
-//	printf("invariant in add: %i\n", three_mass_invariant(vmass));
 	assert(three_mass_invariant3(vmass) == 0);
 
 	return 0;
@@ -61,8 +62,6 @@ int three_mass_ins3(struct three_mass3* vmass, struct vertex3* given,
 	return rc;
 }
 
-//find
-
 //rm
 void three_mass_rm3(struct three_mass3* vmass, struct vertex3* vertex, 
 		   struct vertex_list_node3* node)
@@ -73,18 +72,3 @@ void three_mass_rm3(struct three_mass3* vmass, struct vertex3* vertex,
 
 	assert(three_mass_invariant3(vmass) == 0);
 }
-
-/*
-//print
-void three_mass_print(struct three_mass* vmass)
-{
-	printf("row\n");
-	vertex_list_print(vmass->row);
-
-	printf("column\n");
-	vertex_list_print(vmass->column);
-
-	printf("value\n");
-	vertex_list_print(vmass->value);
-}
-*/

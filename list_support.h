@@ -1,4 +1,6 @@
 //work with graph through list
+//here must write functions that helps to work with list
+//this file will be usefull when struct will be partitioned
 
 //количество вершин с которыми смежна вершина
 int line_zero(struct vertex_list* vlist)

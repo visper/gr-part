@@ -1,3 +1,5 @@
+//second reaLisation of greedy_partition
+//NOT WORKED
 
 int greedy_partition (struct vertex_list* vlist, struct vertex_list* vlist1, 
 		      struct vertex_list* vlist2)

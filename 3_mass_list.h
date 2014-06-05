@@ -1,4 +1,7 @@
-//this .c file created for work with graph, struct - 3 mass
+//this .h file created for work with graph, struct - 3 mass
+//it use functions from right list. this file used in another files,
+//in this case "include" is comented
+
 //#include "right_list.h"
 
 struct three_mass {
@@ -102,42 +105,25 @@ int three_mass_ins(struct three_mass* vmass, struct vertex* given_row,
 	       given_value != NULL);
 
 	int rc = vertex_list_ins(vmass->row, given_row, after_row, node_row);
-/*
-	if (rc == -ERROR || ERROR)
-		return ERROR;
-	if (rc == -ENOMEM || rc == ENOMEM)
-		return ENOMEM;
-*/
+
 	printf("first %i\n", rc);
 	assert(rc == 0);
 
 	rc = vertex_list_ins(vmass->column, given_column, after_column, 
 			     node_column);
-/*
-	if (rc == -ERROR || ERROR)
-		return ERROR;
-	if (rc == -ENOMEM || rc == ENOMEM)
-		return ENOMEM;
-*/
+
 	printf("second %i\n", rc);
 	assert(rc == 0);
 
 	rc = vertex_list_ins(vmass->value, given_value, after_value, 
 			     node_value);
-/*
-	if (rc == -ERROR || ERROR)
-		return ERROR;
-	if (rc == -ENOMEM || rc == ENOMEM)
-		return ENOMEM;
-*/
+
 	printf("third %i\n", rc);
 	assert(rc == 0);
 
 	assert(three_mass_invariant(vmass) == 0);
 	return rc;
 }
-
-//find
 
 //rm
 void three_mass_rm(struct three_mass* vmass, struct vertex* vertex_row, 
@@ -238,4 +224,3 @@ int main(void)
 	return 0;
 }
 */
-

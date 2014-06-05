@@ -1,10 +1,12 @@
 #define NUM_OF_NODES 50
 
+//generated gen values
 int gen_values(int start_value, int finish_value)
 {
 	return start_value + rand() %finish_value;
 }
 
+//fuu count zeroes in line of matrix
 int count_no_zero(int matrix[NUM_OF_NODES][NUM_OF_NODES], int row)
 {
 	int count = 0;
@@ -17,6 +19,8 @@ int count_no_zero(int matrix[NUM_OF_NODES][NUM_OF_NODES], int row)
 	return count;
 }
 
+//do that matrix on main diagonal have only zero and in down triangle 
+//only zero too
 // all down triangle == 0 and no loop
 void up_triangle(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 {
@@ -86,6 +90,7 @@ void matrix_gen_right(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 	//под диагональю
 }
 
+//generate random matrix
 void matrix_gen(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 {
 	//первый элемент всегда должен быть в первой строке
@@ -122,6 +127,7 @@ void matrix_gen(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 	}
 }
 
+//foo for printing of matrix
 void matrix_print(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 {
 	printf("{\n");

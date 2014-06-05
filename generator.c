@@ -28,69 +28,20 @@
 #include "tr_converter.h"
 
 //#define NUM_OF_NODES 50 // 1000 element no more, SIGSEG
-/*
-// I can use realization from algo-test, where used dinamicly loaded algo
-void generator()
-{
 
-
-}
-
-//returned value in int 
-int gen()
-{
-	for(size_t i = 0; i < COUNT; ++i) {
-		int value = gen_values(значения); // и куда-то его пишем
-	}
-}
-*/
-
-/*
-//I need to know about functions
-void fu_test_list()
-{
-	//add COUNT elements in list by generator elements
-	for (size_t i = 0; i < COUNT; ++i) {
-		//maybe create a structure that returned from generator
-		// with generated data
-		generator
-
-
-	}
-
-
-
-}
-
-void fu_test_RRCU()
-{
-
-
-}
-
-void fu_test_3mass()
-{
-
-
-}
-*/
-/*
-void matrix_ini(int **matrix)
-{
-	for (size_t i = 0; i < NUM_OF_NODES; ++i)
-		for (size_t j = 0; j < NUM_OF_NODES; ++j)
-			matrix[i][j] = 0;
-}
-*/
-
+ //foo for work with one of realisation of 3 mass
+ //realization is situated in .h file
 int three_mass_1list(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 {
+	//start of test
 	printf("start test 3_mass_1list_______________________\n");
+	//alloc mem
 	struct three_mass3* m3_1;
 	ALLOC_PTR(m3_1);
 	if (m3_1 == 0)
 		return -ENOMEM;
 
+	//variable for time check
 	size_t start,end;
 	start = checkpoint();
 	three_mass_ini3(m3_1);
@@ -100,6 +51,7 @@ int three_mass_1list(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 	printf("\n");
 
 	start = checkpoint();
+	//convert from matrix to this struct
 	for(int i = 0; i < NUM_OF_NODES; ++i) {
 		for(int j = 0; j < NUM_OF_NODES; ++j) {
 			if (matrix[i][j] == 1) {
@@ -132,6 +84,7 @@ int three_mass_1list(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 	report(end - start);
 	printf("\n");
 
+	//free the malloc
 	if (m3_1->mass != NULL) {
 		free (m3_1->mass);
 		m3_1->mass = NULL;
@@ -141,11 +94,13 @@ int three_mass_1list(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 		m3_1 = NULL;
 	}
 
+	//end of test
 	printf("end test 3_mass_1list_______________________\n");
 	return 0;
 }
 
-
+ //foo for work with one of realisation of 3 mass
+ //realization is situated in .h file
 int three_mass_3list(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 {
 	printf("start test of 3_mass_3list++++++++++++++++\n");
@@ -164,6 +119,7 @@ int three_mass_3list(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 	printf("\n");
 
 	start = checkpoint();
+	//convert from matrix to struct 
 	for(int i = 0; i < NUM_OF_NODES; ++i) {
 		for(int j = 0; j < NUM_OF_NODES; ++j) {
 			if (matrix[i][j] == 1) {
@@ -313,6 +269,7 @@ void prin_cormen(int matrix[NUM_OF_NODES][NUM_OF_NODES],
 }
  */
 
+  //fuu for work with list of lists for save graph
 int list_cormen(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 {
 	printf ("start list cormen***************\n");
@@ -393,7 +350,13 @@ int list_cormen(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 	printf ("number of vertex is %i\n", temp);
 
 	print_head();
-	tr_list_to_dot(list);//error
+//	tr_list_to_dot(list);//error
+
+	//create matrix for translate list to matrix :)
+	int mm[NUM_OF_NODES][NUM_OF_NODES] = {0};
+	tr_list_to_matrix(list, mm);
+      	tr_matrix_to_dot(mm);
+
 	print_end();
 
 /*

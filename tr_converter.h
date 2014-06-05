@@ -12,6 +12,7 @@
 
 FILE *f;
 
+//fuu for print in file head that in all files is equal
 void print_head(void)
 {
 	f = fopen(get_time(), "w+");
@@ -39,6 +40,7 @@ sep[1] // "}"
 */
 }
 
+//fuu for print in file end that in all files is equal
 void print_end(void)
 {
 	fprintf(f, "\n");
@@ -47,6 +49,7 @@ void print_end(void)
 	fclose(f);
 }
 
+//fuu that counts number of nums in number
 //int len_num_of_nodes(void)
 int len_num(int num)
 {
@@ -65,6 +68,7 @@ int len_num(int num)
 	}
 }
 
+//generator of names
 //нужно создать имена соответствующие каждой вершине
 char* gen_vertexes_names(void)
 {
@@ -199,6 +203,38 @@ void tr_matrix_to_dot(int matrix[][NUM_OF_NODES])
 }
 */
 
+ //fuu for translate from "cormen list" to matrix
+void tr_list_to_matrix(struct vertex_list* vlist, int matrix[][NUM_OF_NODES])
+{
+	for (int i = 0; i < NUM_OF_NODES; ++i) {
+		for (int j = 0; j < NUM_OF_NODES; ++j) {
+			matrix[i][j] = 0;
+		}
+	}
+
+	int j = 0;
+	struct vertex_list* i = NULL;
+      	for (i = vlist; j < 19; i = i + sizeof(struct vertex_list*)) {
+//      	for (i = vlist; j < NUM_OF_NODES; i = i + sizeof(struct vertex_list*)) {
+		//если пусто пропускаем
+		if ( vertex_list_state(i) == EMPTY ) {
+			j++;
+			continue;
+		}
+
+		//печатаем вершины с которыми есть соединение
+		struct vertex_list_node* node;
+		for (node = i->head; node != NULL; node = node->next) {
+			assert(node->data != NULL);
+			assert(vertex_list_state(i) != EMPTY);
+			matrix[j][node->data->weight] = 1;//error
+		}
+		++j;
+		printf("%i\n", j);
+	}
+}
+
+//fuu for translate from matrix to dot language in file
 void tr_matrix_to_dot(int matrix[][NUM_OF_NODES])
 {
 	char* nodes_names;
@@ -250,6 +286,8 @@ void tr_matrix_to_dot(int matrix[][NUM_OF_NODES])
 	}
 }
 
+//fuu for translate from "cormen list" to dot language
+//work only to 19 vertex!!!! 
 void tr_list_to_dot(struct vertex_list* vlist)
 {
 	printf("test2\n");
@@ -265,7 +303,7 @@ void tr_list_to_dot(struct vertex_list* vlist)
 	char* temp_vertex;
 	temp_vertex = malloc((vertex_name_len+1) * sizeof(char));
 
-	size_t j = 0;
+	int j = 0;
 	struct vertex_list* i;
 //	for (i = vlist; j < NUM_OF_NODES; i = i + sizeof(struct vertex_list*)) {
       	for (i = vlist; j < 19; i = i + sizeof(struct vertex_list*)) {

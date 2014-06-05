@@ -1,6 +1,6 @@
-/*
-в этот файл каким-то макаром должна попасть матрица
-*/
+//file generated names of files
+//maybe must add here miliseconds
+
 #include <stdio.h>
 #include <errno.h>
 #include <time.h>
