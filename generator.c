@@ -350,12 +350,12 @@ int list_cormen(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 	printf ("number of vertex is %i\n", temp);
 
 	print_head();
-//	tr_list_to_dot(list);//error
+	tr_list_to_dot(list);//error
 
 	//create matrix for translate list to matrix :)
-	int mm[NUM_OF_NODES][NUM_OF_NODES] = {0};
-	tr_list_to_matrix(list, mm);
-      	tr_matrix_to_dot(mm);
+//	int mm[NUM_OF_NODES][NUM_OF_NODES] = {0};
+//	tr_list_to_matrix(list, mm);
+//      tr_matrix_to_dot(mm);
 
 	print_end();
 

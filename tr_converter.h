@@ -290,11 +290,9 @@ void tr_matrix_to_dot(int matrix[][NUM_OF_NODES])
 //work only to 19 vertex!!!! 
 void tr_list_to_dot(struct vertex_list* vlist)
 {
-	printf("test2\n");
-
 	char* nodes_names;
 	nodes_names = gen_vertexes_names();
-	//	printf ("\n%s\n", nodes_names);
+//	printf ("\n%s\n", nodes_names);
 
 	//количество байт для сдивига в nodes_names
 	size_t vertex_name_len = 6 + len_num(NUM_OF_NODES);
@@ -303,17 +301,25 @@ void tr_list_to_dot(struct vertex_list* vlist)
 	char* temp_vertex;
 	temp_vertex = malloc((vertex_name_len+1) * sizeof(char));
 
-	int j = 0;
-	struct vertex_list* i;
-//	for (i = vlist; j < NUM_OF_NODES; i = i + sizeof(struct vertex_list*)) {
-      	for (i = vlist; j < 19; i = i + sizeof(struct vertex_list*)) {
+       	int j = 0;
+	struct vertex_list* i = NULL;
+
+	//for (i = vlist; j < NUM_OF_NODES; i = i + sizeof(struct vertex_list*)) {
+      for (i = vlist; j < 19; i = i + sizeof(struct vertex_list*)) {
+		//vertex20 head = 0x8???
+		//24 something wrong and after too
 		if ( vertex_list_state(i) == EMPTY ) {
 			j++;
 			continue;
 		}
 
+		//if ( j <= 20 ) {
+		//	j++;
+		//	continue;
+		//}
+
 		//через -> печатаем вершины с которыми есть соединение
-		struct vertex_list_node* node;
+		struct vertex_list_node* node = NULL;
 //		for (node = vlist->head; node != NULL; node = node->next) {
 		for (node = i->head; node != NULL; node = node->next) {
 
@@ -326,6 +332,8 @@ void tr_list_to_dot(struct vertex_list* vlist)
 			temp_vertex[0] = '\0';
 
 			fprintf (f, "%s", _dir_con());
+			//assert(node != NULL);
+			//assert(node->data != NULL);
 			//memcpy error
 			memcpy(temp_vertex, 
 			       nodes_names+(node->data->weight * 
@@ -344,6 +352,59 @@ void tr_list_to_dot(struct vertex_list* vlist)
 		j++;
 		printf("%i\n", j);
 	}
+
+	/*
+	//in this case when we go from end of list, vertex 37 is SIGSEGV
+	//adress is {head = 0x3034786574726576, tail = 0x3134786574726576}
+	int j = NUM_OF_NODES-1;
+	for (i = vlist + ((NUM_OF_NODES-1) * sizeof(struct vertex_list*));
+	j >= 0; i = i - sizeof(struct vertex_list*)) {
+
+		//vertex20 head = 0x8???
+		//24 something wrong and after too
+
+//		if ( vertex_list_state(i) == EMPTY ) {
+//			j--;
+//			continue;
+//		}
+
+
+		//через -> печатаем вершины с которыми есть соединение
+		struct vertex_list_node* node = NULL;
+//		for (node = vlist->head; node != NULL; node = node->next) {
+		for (node = i->tail; node != NULL; node = node->prev) {
+
+			memcpy(temp_vertex, 
+			       nodes_names + (j*(vertex_name_len*sizeof(char))),
+			       vertex_name_len);
+			temp_vertex[vertex_name_len] = '\0';
+
+			fprintf (f, "%s", temp_vertex);
+			temp_vertex[0] = '\0';
+
+			fprintf (f, "%s", _dir_con());
+			assert(node != NULL);
+			assert(node->data != NULL);
+			//memcpy error
+			memcpy(temp_vertex, 
+			       nodes_names+(node->data->weight * 
+					    (vertex_name_len * sizeof(char))),
+			       vertex_name_len);
+
+			temp_vertex[vertex_name_len] = '\0';//del
+			fprintf (f, "%s", temp_vertex);
+			temp_vertex[0] = '\0';
+
+			//в конце строки;
+			fprintf (f, "%s", sep[4]);
+			// и после чего \n
+			fprintf (f, "%s", "\n");
+		}
+		j--;
+		printf("%i\n", j);
+	}
+	*/
+
 	if (temp_vertex != NULL) {
 		free(temp_vertex);
 		temp_vertex = NULL;
