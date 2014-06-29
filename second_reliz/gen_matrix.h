@@ -1,8 +1,14 @@
-#define NUM_OF_NODES 50
+#include <sys/time.h>
+
+//#define NUM_OF_NODES 50
 
 //generated gen values
 int gen_values(int start_value, int finish_value)
 {
+  //	srand(0xCAFEBABE);
+	struct timeval t;
+	gettimeofday (&t, NULL);
+	srand(t.tv_usec * t.tv_sec);
 	return start_value + rand() %finish_value;
 }
 
@@ -14,8 +20,6 @@ int count_no_zero(int matrix[NUM_OF_NODES][NUM_OF_NODES], int row)
 		if (matrix[row][i] == 1)
 			++count;
 	}
-
-//	assert(count > 0);
 	return count;
 }
 
@@ -39,17 +43,25 @@ void up_triangle(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 void del_zero_lines(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 {
 	for(size_t i = 0; i < NUM_OF_NODES; ++i) {
+		if (i == NUM_OF_NODES-1) //on last line must no elements
+			break;
+
 		int rc;
 		rc = count_no_zero(matrix, i);
-		if (rc == 0 && i < NUM_OF_NODES - 6) { // 6 lines ca be empty
+		if (rc == 0 && i > NUM_OF_NODES - 6) { // 6 lines ca be empty
 			int node = gen_values(i, NUM_OF_NODES);
-			assert (node >= i && node < NUM_OF_NODES);
+			while (node < i && node >= NUM_OF_NODES) {
+				node = gen_values(i, NUM_OF_NODES);
+			}
+//	      			assert (node >= i && node < NUM_OF_NODES);
 			matrix[i][node] = 1;
 		}
 	}
 }
 
 //строим матрицу с единицами над диаганалью
+//AHTUNG!!! хороший вриант генерации матрицы одной функцией,
+// но получается оч много связей
 void matrix_gen_right(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 {
 	//первый элемент всегда должен быть в первой строке
@@ -60,30 +72,40 @@ void matrix_gen_right(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 		// их может быть от 1 до NUM_OF_NODES/2
 		//чтобы сохранить правило разряженой матрицы
 		int num_nodes = gen_values(i, ((NUM_OF_NODES/2)-1));
-		if (num_nodes > NUM_OF_NODES)
-			continue;
+//		if (num_nodes > NUM_OF_NODES)
+//			continue;
 
-		if (i > 0) {
+		if (i > 0) { // step back if num of elem in line == 0
 			if (count_no_zero(matrix, i-1) == 0)
 				--i;
 		}
 
-		int prev = 0;
+		//generation elements in line
 		for (size_t j = 0; j < num_nodes; ++j) {
 			//в строке должно быть вершин больше 0
 			//но меньше NUM_OF_NODES/2
 
-			prev = gen_values(prev, NUM_OF_NODES); //error
+			if (i == (NUM_OF_NODES-1)) // in last line must no elem
+				break;
+
+			int new_elem = 0;			
+			new_elem = gen_values(i + 1, NUM_OF_NODES);
+			while (new_elem <= i || new_elem > NUM_OF_NODES) {
+				new_elem = gen_values(i + 1, NUM_OF_NODES);
+			}
+			matrix[i][new_elem] = 1;
+
+//			if (j == (num_nodes - 1))
+//				prev = 0;
+
+/*
 			if (prev < i)
 				continue;
 			if (prev > NUM_OF_NODES)
 				continue;
 			if (i == prev) //delete main diagonal
 				continue;
-			matrix[i][prev] = 1;
-
-			if (j == (num_nodes - 1))
-				prev = 0;
+*/
 		}
 	}
 	//если использовать этот способ нужно будет подчистить 
