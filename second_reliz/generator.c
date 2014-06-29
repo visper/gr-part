@@ -305,7 +305,12 @@ int list_cormen(int matrix[NUM_OF_NODES][NUM_OF_NODES])
 				v->weight = j; //column
 
 				int rc1 = add(list, v, i);
+				//printf("\n error add is %i \n", rc1);
 				assert (rc1 == 0);
+				//when so many elements add return -22.
+				//this is SIGTTOU 22
+				//Background process trying to write,
+				//to TTY (POSIX)
 			}
 		}
 	}
@@ -416,17 +421,22 @@ int main(int argc, char** argv)
 	//сначала представляем граф в виде двумерной матрицы
 	int matrix[NUM_OF_NODES][NUM_OF_NODES] = {0};
 
-//	printf ("gen = %i\n", gen_values(5, 10)); //8
-//	printf("gen 2 = %i\n", 5 + rand() %10); //11
+	matrix_gen(matrix);
+	matrix_gen(matrix);
+       	matrix_gen(matrix);
+	matrix_gen(matrix);
 
-	matrix_gen(matrix);
-	matrix_gen(matrix);
-	matrix_gen(matrix);
-	matrix_gen(matrix);
 	// оставляет единицы в верхнем треугольнике
 	// петель нет, но могут быть пустые строки
 	up_triangle(matrix); 
 	del_zero_lines(matrix);
+	up_triangle(matrix); // after del_zero lines can appeared 
+	                     // one elements in down triangle
+	del_zero_lines(matrix);
+	up_triangle(matrix); 
+	del_zero_lines(matrix);
+	up_triangle(matrix); 
+	//	matrix_gen_right(matrix);
 
 	matrix_print(matrix);
 
