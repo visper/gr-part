@@ -77,6 +77,8 @@ char* gen_vertexes_names(void)
 
 	//длина имени одной вершины, 6 - vertex
 	int vertex_name_len = 6 + len_num(NUM_OF_NODES);
+	//without "vertex" in names
+//	int vertex_name_len = len_num(NUM_OF_NODES);
 
 	//здесь будут храниться все имена
 	char* graph = NULL;
@@ -97,7 +99,8 @@ char* gen_vertexes_names(void)
 		}
 		v_name[0] = '\0';
 
-		v_name = strcat(v_name, "vertex");
+		//vartex in name is deleted
+		//v_name = strcat(v_name, "vertex");
 
 		char* num = NULL;
 		num = malloc(len_num(NUM_OF_NODES) * sizeof(char));
